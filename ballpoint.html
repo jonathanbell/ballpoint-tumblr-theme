@@ -1,0 +1,523 @@
+<!DOCTYPE html><html>
+
+	<!--  HTML5 Ballpoint theme for Tumblr made by Jonathan Bell (jonathanbell.ca). Changelog:
+
+		v0.5.3: Added fitVid.js and removed too large of a styling on a <blockquote>. That's it.
+
+	-->
+
+
+	<head>
+
+		<meta charset="utf-8">
+		{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+		<meta name="robots" content="index, follow, all" />
+
+		<!-- you've got options.. :) tumblr user choices. -->
+		<meta name="color:Text" content="#070707" />
+		<meta name="color:Background" content="#ffffff"/>
+		<meta name="color:Dots" content="#cccccc"/>
+		<meta name="color:Hover" content="#aaaaaa"/>
+		<meta name="if: Make Text Bigger" content="0" />
+		<meta name="if:Endless Scrolling" content="1"/>
+		<meta name="if:Show Following" content="1"/>
+		<meta name="if:Show Play Count" content="1"/>
+		<meta name="if:Show Copywright" content="1"/>
+
+		<!-- load content "zoomed in" on an iPhone -->
+		<meta name="viewport" content="width=device-width" />
+
+		<link rel="alternate" type="application/rss+xml" href="{RSS}" />
+		<link rel="shortcut icon" href="{Favicon}">
+
+		<title>{block:PostTitle}{PostTitle} &raquo; {/block:PostTitle} {Title} </title>
+
+		<style type="text/css">
+
+			/* default CSS for the rest of us browsahzzz. aiming for an adaptive design, viewable on all devices. */
+
+			* {
+				/*  small reset */
+				list-style: none;
+				margin: 0;
+			}
+
+			body {
+				background: {color:Background};
+				padding: 2em; font-family: Helvetica, sans-serif;
+				line-height: 1.51em;
+				font-size: 0.713em;
+				color: {color:Text};
+				margin-bottom: 2.7em;
+			}
+
+			header#main h1 {
+				font-size: 1.3em;
+				display: inline;
+			}
+
+			header#main h2, h1#searchresults, h3.semantic {
+				font-size: 1em;
+			}
+
+			header#main h2, h1#searchresults, h3.semantic {
+				font-weight: normal;
+			}
+
+			header#main {
+				width: 84.554678692221%;
+				border-top: 1px solid {color:Background};
+			}
+
+			div#followingd {
+				margin-top: 45px;
+			}
+
+			ul#following {
+				max-width: 50%;
+				max-height: 585px;
+				overflow: hidden;
+			}
+
+			ul#following li {
+				float: left;
+				margin: 0.1em;
+			}
+
+			ul#following li img {
+				width: 100%;
+			}
+
+			h3.semantic {
+				padding-top: 3px;
+			}
+
+			a {
+				color: {color:Text};
+			}
+
+			a, a:active, a:hover, h3.semantic a {
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: {color:Hover};
+			}
+
+			blockquote {
+				font-size: 1.5em;
+				font-style: italic;
+				padding: 1.5em;
+			}
+
+			.desc blockquote {
+				font-size: 1em;
+				padding: 0;
+			}
+
+			p { padding: 3px 3px 1em 0px; }
+			header.desc time { font-weight: bold; }
+			div.body ul li { list-style: square; }
+			div.body ul, div.body ol { padding-bottom: 1em; }
+			div.body ol li { list-style-type: upper-roman; }
+			header.desc p { padding-top: 0px; }
+			div.audio_player { margin-top: 3px; }
+			div.audio_player, div.audio_player embed  { float: left; }
+
+			section#info, section#info2, section#info3, nav#general, header.desc, nav.pagecount { width: 17%; padding: 3px 1em 3px 7px; border-left: 1px dotted {color:Dots}; } /* 24.23900789177% 215px by 887px was 24.0135287485908 */
+			section#info, section#info2, section#info3 { float: left; }
+
+			nav#general { position: fixed; right: 1%; } /* width: 7.328072153325817%; 65px */
+			section#info ul, section#info2 ul, section#info3 ul, nav#general ul { padding: 0; }
+			section.notes { clear: both; }
+			ol.notes { padding-left: 20%; padding-top: 1em; max-width: 60%; }
+			li.more_notes_link_container a.more_notes_link { text-align: left; float: left; margin-top: 1em; }
+			input#search { width: 39%; margin-top: 15px; margin-bottom: 5px; background: #eee; border: 1px solid #999; color: black; clear: both; }
+
+			img#avatar { height: 1em; }
+			img.albumart { width: 24.23900789177%; float: right; }
+			div.html_photoset iframe { width: 100%; }
+
+			article, nav.pagination, div#searchresults { width: 84.554678692221%; } /* 750px */
+			header.desc { float: left; }
+			section.beef { width: 70.7610146862483%; max-width: 535px; float: left; }
+			section.beef img.photo, section.beef div.vid object, section.beef div.vid object embed, section.beef div.vid embed.video_player /* the tumblr player */ { width: 100%; }
+			img.photo {  }
+			div.vid iframe { width: 100%; }
+
+			div.body img { max-width: 100%; overflow: hidden; }
+
+			hr.clear { clear: both; margin-bottom: 2em; visibility: hidden; }
+
+			{block:IfMakeTextBigger}body { font-size: 0.77em; } header#main h1 { font-size: 1.5em; }{/block:IfMakeTextBigger}
+
+			nav.pagecount { float: left; border: none; }
+
+			footer { clear: both; min-height: 2.7em; }
+
+
+			/* hugs for the hunnies, pounds for the roughnecks... give mobile CSS to mobile devices and big desktop CSS to the biggens via media quieries.. :) */
+
+			/* for iphone or smartphone */
+			@media only screen and (max-width: 481px), only screen and (max-device-width: 481px)
+			{
+			body { padding: 3px 1px 1px 3px; margin: 3px; }
+			section#info, section#info2, section#info3, nav#general, header.desc, article, section.beef, nav.pagination, div#searchresults { float: none; width: 93%; border-left: none; }
+			section#info, section#info2, section#info3, header.desc { border-top: 1px dotted {color:Dots}; border-left: none; }
+			header.desc, nav.pagecount { margin-bottom: 3px; }
+			nav#general { position: static; }
+			hr.clear { margin-bottom: 10px; }
+			img.albumart { float: none; }
+			p.audio { margin-top: 3px; }
+			section.notes { display: none; }
+			}
+
+			/* for big desktops */
+			@media only screen and (min-width: 1280px)
+			{
+			nav#general { right: 19.123%; }
+			}
+
+			/* for really big desktops and tv */
+			@media only screen and (min-width: 1680px)
+			{
+			nav#general { right: 33%; }
+			}
+
+			{CustomCSS}
+
+		</style>
+
+		<!-- Make IE like HTML5, hopefully.. ;) -->
+		<!--[if lt IE 8]><script>document.createElement("header");document.createElement("footer");document.createElement("nav");document.createElement("article");document.createElement("section");</script><![endif]-->
+
+		<!-- add media query support for older browsers -->
+		<script src="http://static.tumblr.com/uoxxoej/pIdlrxepo/css3-mediaqueries.js"></script>
+
+		<!-- jQuery -->
+		<script src="http://static.tumblr.com/uoxxoej/czDls33vg/jquery.js"></script>
+
+		<!-- responsive videos -->
+  	<script src="http://static.tumblr.com/uoxxoej/xTOm605fx/jquery.fitvids.js"></script>
+
+	</head>
+
+	<body>
+
+		<header id="main">
+
+			<section id="info">
+				{block:IfShowAvatar}
+				<img id="avatar" src="{PortraitURL-64}">
+				{/block:IfShowAvatar}
+				<h1><a href="/">{Title}</a></h1>
+			</section>
+
+			<section id="info2">
+				<h2>{Description}</h2>
+			</section>
+
+			{block:HasPages}
+			<section id="info3">
+				<ul>
+				{block:Pages}
+				<li><a href="{URL}">{Label}</a></li>
+				{/block:Pages}
+				</ul>
+			</section>
+			{/block:HasPages}
+
+		</header>
+
+
+		<nav id="general">
+
+			<ul>
+			{block:Twitter}
+			<li><a {Target} href="http://twitter.com/{TwitterUsername}">Twitter</a></li>
+			{/block:Twitter}
+			{block:AskEnabled}
+			<li><a href="/ask">{AskLabel}</a></li>
+			{/block:AskEnabled}
+			<li><a href="/archive">Archive</a></li>
+			<li><a href="/mobile">Mobile</a></li>
+			<li><a href="{RSS}">RSS</a></li>
+			</ul>
+
+			<form action="/search" method="get"><input id="search" type="text" name="q" value="{SearchQuery}" /></form>
+
+			{block:IfShowFollowing}
+			{block:Following}
+				<div id="followingd">Following:
+				<ul id="following">
+				{block:Followed}<li><a href="{FollowedURL}" title="{FollowedTitle}"><img src="{FollowedPortraitURL-16}" /></a></li>{/block:Followed}
+				</ul></div>
+			{/block:Following}
+			{/block:IfShowFollowing}
+
+			{block:IfEndlessScrolling}
+				{block:IfShowCopywright}<p style="margin-top: 10px; padding-bottom: 0px;">&copy; {Title}</p><!-- If you were nice, you'd leave this.-->{/block:IfShowCopywright}<p style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;"><small><a href="http://www.tumblr.com/themes/by/jonnymilano" title="Ballpoint, a Tumblr Theme">Ballpoint</a> by <a href="http://webdesign.jonathanbell.ca" title="Jonathan Bell">JB</a></small></p>
+			{/block:IfEndlessScrolling}
+
+		</nav>
+
+		<hr style="clear: both; visibility: hidden; margin-bottom: 7em;" />
+
+		{block:SearchPage}<div id="searchresults">
+
+			<header class="desc"><p style="font-weight: bold;">Search</p>
+			</header>
+
+			<section class="beef">
+			<p>{SearchResultCount} results for "{SearchQuery}".</p>
+			</section>
+
+			<hr style="clear: both; visibility: hidden; margin-bottom: 7em;" />
+
+		</div>{/block:SearchPage}
+
+
+		<div id="content"><!-- for endless scrolling -->{block:Posts}
+
+			{block:Quote}<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}
+				<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				<blockquote>"<i>{Quote}</i>"</blockquote>
+				{block:Source}<p style="padding-left: 3em;"><strong>&there4;</strong> {Source}</p>{/block:Source}
+				</section>
+
+			</article>{/block:Quote}
+
+			{block:Photo}<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:Caption}{Caption}{/block:Caption}
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				{LinkOpenTag}
+				<img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" />
+				{LinkCloseTag}
+				</section>
+
+			</article>{/block:Photo}
+
+			{block:Link}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}
+				<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				<h3 class="semantic"><b><a href="{URL}" {Target}>{Name}</a></b></h3>
+				{block:Description}{Description}{/block:Description}
+				</section>
+
+			</article>
+			{/block:Link}
+
+			{block:Chat}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				{block:Title}<h3 class="semantic">{Title}</h3>{/block:Title}
+				{block:Lines}
+				<p class="{Alt}">
+				{block:Label}<strong>{Label}</strong>{/block:Label}
+				{Line}</p>
+				{/block:Lines}
+				</section>
+
+			</article>
+			{/block:Chat}
+
+			{block:Audio}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:Caption}<!-- start caption -->{Caption}<!-- end caption -->{/block:Caption}
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:IfShowPlayCount}<p>{PlayCountWithLabel}</p>{/block:IfShowPlayCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				<!-- really wish the since this theme is trying to be pure html5, that Tumblr would supply the URL via API to the media files... That way a developer could write an HTML5 code block for audio and video. Anyways, since not, we'll kick it old school... -->
+				{block:AlbumArt}<img class="albumart" src="{AlbumArtURL}" alt="{block:Artist}{Artist}{/block:Artist}{block:TrackName} - {TrackName}{/block:TrackName}" />{/block:AlbumArt}
+				{AudioPlayerGrey}<br /><br /><br />
+				<p class="audio">{block:Artist}<strong>Artist:</strong> {Artist}<br />{/block:Artist}
+				{block:TrackName}<strong>Song:</strong> {TrackName}<br />{/block:TrackName}
+				{block:Album}<strong>Album:</strong> {Album}<br />{/block:Album}
+				</p>
+				{block:ExternalAudio}
+				<p><a href="{ExternalAudioURL}">Download</a></p>
+				{/block:ExternalAudio}
+				</section>
+
+			</article>
+			{/block:Audio}
+
+			{block:Text}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				{block:Title}<h3 class="semantic"><b>{Title}</b></h3>{/block:Title}
+				<div class="body">{Body}</div>
+				</section>
+
+			</article>
+			{/block:Text}
+
+			{block:Answer}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				<h3 class="semantic">{Asker} asked: {Question}</h3>
+				<p>{Answer}</p>
+				</section>
+
+			</article>
+			{/block:Answer}
+
+			{block:Video}
+			<article>
+
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:Caption}{Caption}{/block:Caption}
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}		{block:IfShowPlayCount}<p>{PlayCountWithLabel}</p>{/block:IfShowPlayCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				<div class="vid">{Video-500}</div>
+				</section>
+
+			</article>
+			{/block:Video}
+
+			{block:Photoset}
+			<article>
+				<header class="desc"><p>
+				<a href="{Permalink}">{block:Date}<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate>{Month} {DayOfMonthWithZero}, {Year}</time>{/block:Date}</a></p>
+				{block:HasTags}<p>Filed in: {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}</p>{/block:HasTags}
+				{block:NoteCount}<p><a href="{Permalink}">{NoteCountWithLabel}</a></p>{/block:NoteCount}
+				{block:ContentSource}<p>source: <a href="{SourceURL}">{SourceTitle}</a></p>{/block:ContentSource}
+				</header>
+
+				<section class="beef">
+				{Photoset-500}
+				{block:Caption}
+				{Caption}
+				{/block:Caption}
+				</section>
+			</article>
+			{/block:Photoset}
+
+
+			<section class="notes">
+
+				{block:PostNotes}{PostNotes}{/block:PostNotes}
+
+			</section>
+
+			<hr style="clear: both; visibility: hidden; margin-bottom: 7em;" />
+
+		{/block:Posts}</div><!-- /content -->
+
+
+		{block:Pagination}
+
+				<nav class="pagecount">
+
+					{block:IfEndlessScrolling}<div style="visibility: hidden;">{/block:IfEndlessScrolling}
+					<p style="padding: 3px 3px 0 0;">Page {CurrentPage} of {TotalPages}</p>
+					{block:IfEndlessScrolling}</div><noscript><p style="color: red;">Error: This Tumblr needs JavaScript in order to function properly. Please enable JavaScript and reload the page.</p></noscript>{/block:IfEndlessScrolling}
+
+					<p>{block:NextPage}<b><a id="next" href="{NextPage}">&larr; Older</a></b>{/block:NextPage} &#9674; {block:PreviousPage} <b><a href="{PreviousPage}">Newer &rarr;</a></b>{/block:PreviousPage}</p>
+
+				</nav>
+
+		{/block:Pagination}
+
+
+		<footer>
+
+			{block:IfEndlessScrolling}<div style="visibility: hidden;">{/block:IfEndlessScrolling}
+			{block:IfShowCopywright}<p style="padding: 1.5em 0 0 7px;">&copy; {Title}</p><!-- If you were nice, you'd leave this.-->{/block:IfShowCopywright}<p style="padding: 0 0 0 7px;"><small><a href="http://www.tumblr.com/themes/by/jonnymilano" title="Ballpoint, a Tumblr theme">Ballpoint</a> by <a href="http://webdesign.jonathanbell.ca" title="Jonathan Bell">JB</a></small></p>
+			{block:IfEndlessScrolling}</div>{/block:IfEndlessScrolling}
+
+		</footer>
+
+		<script>
+
+			$(document).ready(function(){
+
+	    	$('section.beef').fitVids();
+
+	    });
+
+    </script>
+
+		{block:IfEndlessScrolling}<script src="http://static.tumblr.com/uoxxoej/Buols1r7u/jquery.infinitescroll.min.js"></script>
+
+		<script>
+			$('#content').infinitescroll({
+				loading: {
+				img: 'http://static.tumblr.com/uoxxoej/dxXls2467/trans.gif',
+				msgText: ' '
+				},
+
+				animate: true,
+				navSelector: "a#next:last",
+				nextSelector: "a#next:last",
+				itemSelector: "#content",
+				debug: false
+				}
+			);
+		</script>{/block:IfEndlessScrolling}
+
+	</body>
+
+</html>
