@@ -7,7 +7,7 @@ This theme would be very well suited to a photographer, illustrator, or any othe
 
 ## To use the newest version of this theme:
 
-1. [Login to tumblr](http://tumblr.com)
+1. [Login to Tumblr](http://tumblr.com)
 2. Vistit the theme's page: [http://www.tumblr.com/theme/32279](http://www.tumblr.com/theme/32279)
 3. Click "Install"
 
